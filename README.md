@@ -1,3 +1,9 @@
+This app was built for demo purposes, using my (old) [Pokemon GraphQL server](https://github.com/jgarrow/graphql-server-pokeapi) for the backend (just running it locally).
+
+- `npm i`
+- Make sure you have the [server](https://github.com/jgarrow/graphql-server-pokeapi) running at port 4000
+- `npm run dev`
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
