@@ -25,17 +25,6 @@ const GET_POKEMON = gql(`
   }
 `);
 
-// export const GET_PARTY = gql(`
-//   query GetParty($id: Int!) {
-//     trainer(id: $id) {
-//       id
-//       party {
-//         id
-//       }
-//     }
-//   }
-// `);
-
 export default function Pokemon() {
   const [params, setParams] = useSearchParams();
   const page = Number(params.get("page")) || 1;

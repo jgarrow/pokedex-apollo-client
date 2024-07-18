@@ -52,14 +52,13 @@ const PokemonPage = () => {
           }),
           fields: {
             party(existingPartyRefs = []) {
-              const newPokemonRef = cache.writeFragment({
+              const newPokemonRef = cache.readFragment({
                 id: cache.identify(newPokemon),
                 fragment: gql(`
                   fragment NewPokemon on Pokemon {
                     id
                   }
                 `),
-                data: newPokemon,
               });
 
               return [...existingPartyRefs, newPokemonRef];

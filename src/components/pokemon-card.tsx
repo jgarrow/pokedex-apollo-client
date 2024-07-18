@@ -4,12 +4,11 @@ import cn from "../utils/cn";
 import { Link } from "react-router-dom";
 import AddToPartyButton from "./add-to-party-button";
 import InPartyIndicator from "./party-indicator-button";
-
+import { TRAINER_ID } from "./party-sidebar";
 import type {
   GetPartyQuery,
   GetPokemonListQuery,
 } from "../__generated__/graphql";
-import { TRAINER_ID } from "./party-sidebar";
 
 export const ADD_TO_PARTY = gql(`
   mutation AddToParty($trainerId: Int!, $pokemonId: Int!) {
@@ -39,6 +38,7 @@ export default function PokemonCard({
     },
     update(cache, { data }) {
       const newPokemon = data?.addPokemonToParty;
+      
       if (newPokemon) {
         cache.modify({
           id: cache.identify({
@@ -47,14 +47,13 @@ export default function PokemonCard({
           }),
           fields: {
             party(existingPartyRefs = []) {
-              const newPokemonRef = cache.writeFragment({
+              const newPokemonRef = cache.readFragment({
                 id: cache.identify(newPokemon),
                 fragment: gql(`
                   fragment NewPokemon on Pokemon {
                     id
                   }
                 `),
-                data: newPokemon,
               });
 
               return [...existingPartyRefs, newPokemonRef];
@@ -143,8 +142,6 @@ export default function PokemonCard({
               src={`https://raw.githubusercontent.com/HybridShivam/Pokemon/master/assets/images/${imageId}.png`}
               alt={pokemon?.name ?? ""}
               className="max-h-full bg-no-repeat bg-center bg-contain bg-[length:90%] drop-shadow-[0px_4px_2px_rgba(0,0,0,0.5)]"
-              //   className="max-h-full bg-no-repeat bg-center bg-contain bg-[length:90%] drop-shadow-[0px_4px_2px_rgba(0,0,0,0.5)]"
-              //   style={{ backgroundImage: `url(${Pokeball})` }}
             />
           </div>
           <h2 className="capitalize text-xl mt-2 text-contrast z-0">
