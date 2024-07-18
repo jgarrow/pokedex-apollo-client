@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-contrast {
+    color: #fefefe;
+    text-shadow: -1px -1px 0 #0a0a0a, 1px -1px 0 #0a0a0a, -1px 1px 0 #0a0a0a, 1px 1px 0 #0a0a0a;
+  }
+
+  .flip-animation {
+    transition: transform 0.3s;
+    transform-style: preserve-3d;
+    transform-origin: center right;
+  }
+  
+  .flip {
+    transform: translateX(-100%) rotateY(-180deg);
+  }
+}
